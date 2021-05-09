@@ -15,9 +15,11 @@ def home():
 
 @app.route('/memo', methods=['GET'])
 def listing():
-    sample_receive = request.args.get('sample_give')
-    print(sample_receive)
-    return jsonify({'msg':'GET 연결되었습니다!'})
+    # FIXME: GET 1. 받을 데이터는 없고, DB에 저장되어 있는 정보 가져다가 클라이언트한테 넘겨주기
+    # sample_receive = request.args.get('sample_give')
+
+    articles = list(db.articles.find({}, {'_id': False}))
+    return jsonify({'all_articles':articles})
 
 ## API 역할을 하는 부분
 @app.route('/memo', methods=['POST'])
